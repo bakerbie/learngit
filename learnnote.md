@@ -80,7 +80,7 @@ repository就是我们的软件仓库，在本地建立一个仓库非常简单�
     2. 向仓库提交文件
     `git commit \[-m\] \[本次提交说明\] ` 一次性将暂存区内的文件正式提交至仓库
 
-### 查看当前的状态
+### 3. 查看当前的状态
 `git status` 命令能够告诉你当前状态是什么
 1. 示例1
 
@@ -103,7 +103,7 @@ repository就是我们的软件仓库，在本地建立一个仓库非常简单�
 
         new file:   learnnote.md   文件名称
 
-    Changes not staged for commit:  说明有未向缓存区提交的文件
+    Changes not staged for commit:  说明文件有修改，但是未向缓存区提交
       (use "git add <file>..." to update what will be committed) 提交命令说明
       (use "git checkout -- <file>..." to discard changes in working directory) 放弃修改名利
 
@@ -113,3 +113,20 @@ repository就是我们的软件仓库，在本地建立一个仓库非常简单�
     1. `git checkout -- <filename>` 这个命令是取消工作区的修改，修改后与暂存区一致 
     2. `git rm --cachedd <filename>` 
     这个命令是删除暂存区的文件，如果暂存区的文件和工作区的文件不同，系统会提示你，如果想要强制删除需要`-f`选项
+    3. 当提示有修改的时候会显示` modified:   learnnote.md ` ,我们通过`git diff`命令来查看修改的内容,git用-,+分别表示删除和增加的内容
+
+     
+    @@ -103,7 +103,7 @@ repository就是我们的软件仓库，在本地建立一个仓库非常简单
+     
+             new file:   learnnote.md   文件名称
+     
+    -    Changes not staged for commit:  说明有未向缓存区提交的文件
+    +    Changes not staged for commit:  说明文件有修改，但是未向缓存区提交
+           (use "git add <file>..." to update what will be committed) 提交命令说明
+           (use "git checkout -- <file>..." to discard changes in working directory) 放弃修改名利
+     
+    @@ -113,3 +113,7 @@ repository就是我们的软件仓库，在本地建立一个仓库非常简单
+         1. `git checkout -- <filename>` 这个命令是取消工作区的修改，修改后与暂存区一致 
+         2. `git rm --cachedd <filename>` 
+         这个命令是删除暂存区的文件，如果暂存区的文件和工作区的文件不同，系统会提示你，如果想要强制删除需要`-f`选项
+    +    3. 当提示有修改的时候会显示` modified:   learnnote.md ` ,我们通过`git diff`命令来查看修改的内容
