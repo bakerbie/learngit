@@ -237,10 +237,14 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
     *  我们找到了master指向的位置，也找到了HEAD的指向实际状态
   
   2. 创建新的分支
-    a.  `git checkout -b dev`创建一个新的分支dev并切换到当前分支,它相当于下述二个命令
+    *.  `git checkout -b dev`创建一个新的分支dev并切换到当前分支,它相当于下述二个命令
     ```
     git branch dev  创建分支命令 
     git checkout dev 切换分支命令
     ```
-    b. 如果这时候我们在dev分支上进行修改和提交就相当于下述情况
+    *.  我们可以用`git branch`查看当前工作的分支情况
+    *.  如果这时候我们在dev分支上进行修改和提交就相当于下述情况
     ![](http://www.liaoxuefeng.com/files/attachments/001384908892295909f96758654469cad60dc50edfa9abd000/0)
+  
+  3. 分支合并
+    
