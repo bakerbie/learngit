@@ -177,8 +177,37 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
 
 #### 5. 删除文件
 
-在git中删除文件也是一个修改操作，
+在git中删除文件也是一个修改操作，例如你增加了一个test.txt文件至版本库后，在工作区删除了它，这时git会发现你的版本不同了
 
+    On branch master
+    Changes not staged for commit:
+      (use "git add/rm <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+      deleted:    test.txt
+    no changes added to commit (use "git add" and/or "git commit -a")
 
+这时你有二种选择
+    * 第一种确实从版本库中删除该文件 `git rm file`
+    * 第二种恢复该文件 `git checkout  -- file`
 
+### 远程仓库
 
+#### 1. 远程仓库
+这里我们选用github提供的免费远程仓库，下面介绍一下如何链接到github，注意这里没有讲如同步本地仓库和远程仓库，只是将如何链接到github
+    
+* 第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：`ssh-keygen -t rsa -C "youremail@example.com"`,你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+* 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+![](http://www.liaoxuefeng.com/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0)
+* 为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了
+
+#### 2. 链接远程仓库
+
+  1. 第一步，在github上创建一个远程仓库，这个我就不赘述了。创建后我们得到一个空的仓库。
+  2. 第二步，我们在本地添加一个远端的仓库
+  `git remote add origin git@github.com:michaelliao/learngit.git`
+    * origin:这个是远程仓库的名字，是git默认的，也可以改成别的
+    * 记得更换的github仓库地址
+  3. 第三步，我们将本地的内容推送至远端，`git push -u origin master` 
+    * `git push`命令实际上是把当前分支同步到远端
+    * 由于远端库是空的，我们加上`-u`参数，不仅会把本地仓库的当前分支内容推送至远端的同名分支，而且还会建立2个分支的关系。以后再推送或者拉取的时候就会简化命令。
+    * 
