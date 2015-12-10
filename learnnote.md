@@ -247,4 +247,18 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
     ![](http://www.liaoxuefeng.com/files/attachments/001384908892295909f96758654469cad60dc50edfa9abd000/0)
   
   3. 分支合并
-    
+当我们切换的master分支的时候发现之前的修改都不见了，因为主分支的commit还是"更新远程仓库后的第一个存档"这个状态，如果我们想将主分支与dev分支的内容保持一致就使用分支合并命令。
+`git merge dev`  这个命令用于合并指定分支到当前分支
+    ```
+    $ git merge dev
+    Updating d17efd8..fec145a
+    Fast-forward
+     readme.txt |    1 +
+     1 file changed, 1 insertion(+)
+    ```
+注意这个命令返回的信息中的`Fast-forward`,他说明这是一个快速的合并，他直接把master分支指向dev分支
+  4. 删除分支
+  我们使用`git branch -d dev`来删除dev分支
+
+#### 解决冲突
+
