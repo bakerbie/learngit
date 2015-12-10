@@ -211,3 +211,36 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
     * `git push`命令实际上是把当前分支同步到远端
     * 由于远端库是空的，我们加上`-u`参数，不仅会把本地仓库的当前分支内容推送至远端的同名分支，而且还会建立2个分支的关系。以后再推送或者拉取的时候就会简化命令。
     * 第四步，我们可以更新本地的内容，然后用`git push origin master`
+
+#### 3. 从远程仓库克隆
+  1. 使用`git clone yourgithubaddres` 即可从远端克隆一个仓库，在本生成一个同名的文件夹。
+  2. git除了可以使用ssh协议外还可以使用https协议，缺点是每次都需要输入用户名及密码，要使用https协议，则仓库的地址就需要更换为https方式。
+
+### 分支管理
+分支就像平行宇宙一样，在软件版本管理中，类似于稳定版本、测试版本、超前版本等。
+
+#### 1. 创建与合并分支
+  1. 分支与HEAD的关系
+    ![](http://www.liaoxuefeng.com/files/attachments/0013849087937492135fbf4bbd24dfcbc18349a8a59d36d000/0)
+    *  从上图中可以看出HEAD实际指向的是当前的分支master
+    *  而分支master记录了当前仓库的状体
+    *  我们用`cat .git/HEAD`查看HEAD的值
+    ```
+    $ cat .git/HEAD
+    ref: refs/heads/master
+    ```
+    *  我们用`cat .git/refs/heads/master` 查看当前分支的值
+    `9d9db4b1df6016d38b6d5d3db9dfd9543bef4cf3` 会得到一个hash值
+
+    *  我们用`git log`查看历史记录，发现最后一次提交的状态的值为
+    `9d9db4b1df6016d38b6d5d3db9dfd9543bef4cf3 更新远程仓库后的第一个存档`
+    *  我们找到了master指向的位置，也找到了HEAD的指向实际状态
+  
+  2. 创建新的分支
+    a.  `git checkout -b dev`创建一个新的分支dev并切换到当前分支,它相当于下述二个命令
+    ```
+    git branch dev  创建分支命令 
+    git checkout dev 切换分支命令
+    ```
+    b. 如果这时候我们在dev分支上进行修改和提交就相当于下述情况
+    ![](http://www.liaoxuefeng.com/files/attachments/001384908892295909f96758654469cad60dc50edfa9abd000/0)
