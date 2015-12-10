@@ -261,4 +261,39 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
   我们使用`git branch -d dev`来删除dev分支
 
 #### 解决冲突
-  在这里也修改了文档
+  1.  冲突的产生
+  当二个分支对同一份文档的内容的修改产生了冲突后，如果我们进行分支合并操作，将会提示失败，提示内容如下：
+  ```
+  $ git merge feature1
+  Auto-merging learnnote.md
+  CONFLICT (content): Merge conflict in learnnote.md
+  Automatic merge failed; fix conflicts and then commit the result.
+  ```
+  这将提示你手工解决冲突后，在进行合并
+  2.  冲突的解决
+  我们打开冲突的文件，发现git已经把重复的信息追加到文件的尾部了
+```
+  <<<<<<< HEAD       
+    在这里也修改了文档
+  =======
+  当我们在某一个分支修改了文档，而又在另一个分支也同样修改了改文档，且修改的内容产生冲突时
+  >>>>>>> feature1
+```
+  我们在看当前的状态信息：这里也提示你产生了冲突
+```
+  $ git status
+  On branch master
+  Your branch is ahead of 'origin/master' by 2 commits.
+    (use "git push" to publish your local commits)
+  You have unmerged paths.
+    (fix conflicts and run "git commit")
+
+  Unmerged paths:
+    (use "git add <file>..." to mark resolution)
+
+          both modified:   learnnote.md
+
+  no changes added to commit (use "git add" and/or "git commit -a")
+```
+**这里明确告诉你解决冲突的方式是先手工调整冲突的文档，然后再add，然后再commit**
+**注意：手工调整这个词的意思是系统不会管你调整了那些，只要你add了系统就认为你调整完毕了**
