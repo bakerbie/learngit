@@ -338,6 +338,26 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
 我们无时无刻不在解决BUG，git提供了我们随时可以建立bug分支的能力，在分支上解决问题并提交修改，可以快速的完成bug的修复。本节提出了几个新的特性。
 
   1. 状态保存
-    * 
+    * git提供保存当前工作区的指令，用来临时从当前的状态跳出去做其他事情，例如修复bug当操作完毕后再恢复工作区即可
+    * git stash 是存储工作区的指令，存储后工作区会被清空。
+  2. 工作区恢复
+    * git stash list 查看存储现场
+      * git stash app 恢复工作区，但是恢复后stash并不删除，你需要使用`git stash drop`删除stash
+      * git stash pop 取回存储现场，并删除stash
+
+#### 5. 分支删除
+  * `git branch -d feature1` 如果你的分支并未合并，那么该命令将失效，提示你分支未合并
+  * `git branch -D feature1` 是强制删除分支的命令
+  
+#### 6. 多人协作
+当你从远程库克隆时，实际上git将把远程库的master分支与本地的master分支对应起来，并且远程仓库的名称默认是origin.
+  1. 查看远程库
+    * `git remote` 查看远程库信息，或者用`git remote -v`查看详细信息
+  2. 推送分支
+    * 把分支上的所有本地数据提交到远程库，推送时要指定本地分支。
+    `git push origin dev`
+  3. 抓取分支
+    * 再克隆远程库后默认的情况下你只能看到master分支
+    * 如果你想在DEV上进行开发，你就必须创建远程origin的dev分支到本地，使用`git branch -b dev origind/dev`命令
 
 
