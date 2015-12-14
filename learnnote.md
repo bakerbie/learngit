@@ -348,6 +348,13 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
 #### 5. 分支删除
   * `git branch -d feature1` 如果你的分支并未合并，那么该命令将失效，提示你分支未合并
   * `git branch -D feature1` 是强制删除分支的命令
+<<<<<<< HEAD
+=======
+
+#### 6.删除远程分支
+  * git branch -a 查看远程分支
+  * git push origin --delete <branchname> 注意这个命令不能删除github的默认分支，如果要删除请在github设置其他默认分支
+>>>>>>> 88728074c3704c75241f2611ce2fb4d57cea006f
   
 #### 6. 多人协作
 当你从远程库克隆时，实际上git将把远程库的master分支与本地的master分支对应起来，并且远程仓库的名称默认是origin.
@@ -359,5 +366,35 @@ Git的版本库里存了很多东西，其中最重要的就是称为**stage**�
   3. 抓取分支
     * 再克隆远程库后默认的情况下你只能看到master分支
     * 如果你想在DEV上进行开发，你就必须创建远程origin的dev分支到本地，使用`git branch -b dev origind/dev`命令
+  4. 从远程仓库更新数据
+  `git pull` 可以将远程从仓库的数据更新至本地
+  5. 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name
 
+### 标签管理
+标签与分支类似就是某一个时刻的commit，只不过分支可以移动标签是固定不可移动的。
+1. 建立标签
+  * 切换到需要打标签的分支上
+  * `git tag <tagname>` 将标签打到最新的commit上
+  * 如果忘记打标签了，现在想补上，那么使用`git tag <tagname> commitid`
+  * 使用`git show <tagname>`查看标签信息
+  * 还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字`git tag -a <tagname> -m "this is my tag" commitid`
+  * 还可以通过-s用私钥签名一个标签：`git tag -s v0.2 -m "signed version 0.2 released" commitid` 签名采用PGP签名，因此，必须首先安装gpg（GnuPG），如果没有找到gpg，或者没有gpg密钥对，就会报错。
+
+2. 操作标签
+  * 删除标签:`git tag -d <tagname>`
+  * 推送远程标签：`git push origin <tagname>`,或者一次性推送所有未推送至远程的标签`git push origin --tags`
+  * 远程删除标签：`git push origin :refs/tags/<tagname>`
+
+### 配置git
+1. 全局设置的配置方式
+
+    * git的全局配置文件在~/.gitconfig文件内    
+    * 可以使用`git config --global [option]`来定义全局配置
+
+2. 忽略特殊文件
+并不是所有的文件都需要放在仓库中，如软件运行过程中产生的中间文件，一些图标文件等，我们仅需要软件仓库(.git/的上级目录下)的根目录下编辑.gitignore，将需要忽略的文件放置其中即可。
+    * 我们也可以通过在全局.gitconfig下设置命令，使得全部仓库都忽略以一些文件，可以参考其他的资料。
+    * 注意编写了.gitignore不要忘记将其commit到版本库。否则下次无法使用的。
+
+3. 
 
